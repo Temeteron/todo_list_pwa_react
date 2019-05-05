@@ -36,19 +36,19 @@ class App extends Component {
 
   initLocalForage() {
     localForage.getItem('todos').then(res => {
-      console.table(res);
       if (res != null) {
         this.setState({ todos: res });
       } else {
-        console.log('WILL INIT DB');
         localForage.setItem('todos', this.initObj).then((res) => {
-          console.log('Setting LF first time');
           this.setState({ todos: res });
         });
       }
     });
+    // localForage.clear();
+  }
 
-    localForage.clear();
+  saveToLocalForage() {
+    localForage.setItem('todos', this.state.todos);
   }
 
   componentDidMount() {
@@ -62,12 +62,14 @@ class App extends Component {
         todo.completed = !todo.completed
       }
       return todo;
-    }) });
+    }) },
+      () => this.saveToLocalForage());
   }
 
   // Delete Todo
   delTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] })
+    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] },
+      () => this.saveToLocalForage());
   }
 
   // Add Todo
@@ -78,7 +80,8 @@ class App extends Component {
       id: uuid()
     };
 
-    this.setState({ todos: [...this.state.todos, newToDo] })
+    this.setState({ todos: [...this.state.todos, newToDo] },
+      () => this.saveToLocalForage());
   }
 
   render() {
