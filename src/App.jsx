@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import uuid from 'uuid';
 import localForage from 'localforage';
 import Header from './components/layout/Header';
@@ -86,7 +86,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <HashRouter basename='/'>
         <div style={style.app}>
           <div className="container">
             <Header />
@@ -99,7 +99,7 @@ class App extends Component {
             <Route path="/about" component={About} />
           </div>  
         </div>
-      </Router>
+      </HashRouter>
     );
   }
 }
