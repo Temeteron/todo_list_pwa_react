@@ -9,7 +9,7 @@ function About() {
 				<i>A pwa to-do list developed in React. All of your data will be stored locally.</i>
       </p>
       <p style={style.textWhiteCenter}>
-      	<a href="http://dimitris.greasidis.com/" target="_blank" style={{color: '#0EDAE4'}}>Dgreasidis</a>
+      	<a href="http://dimitris.greasidis.com/" target="_blank" rel="noopener noreferrer" style={{color: '#0EDAE4'}}>Dgreasidis</a>
       </p>
     </React.Fragment>
   )
